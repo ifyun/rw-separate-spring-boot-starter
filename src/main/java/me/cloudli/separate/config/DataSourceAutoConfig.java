@@ -125,15 +125,10 @@ public class DataSourceAutoConfig {
         hikariConfig.setUsername(properties.getUsername());
         hikariConfig.setPassword(properties.getPassword());
 
-        //if (connectionTimeout != 0)
         hikariConfig.setConnectionTimeout(connectionTimeout);
-        //if (validationTimeout != 0)
         hikariConfig.setValidationTimeout(validationTimeout);
-        //if (idleTimeout != 0)
         hikariConfig.setIdleTimeout(idleTimeout);
-        //if(leakDetectionThreshold != 0)
         hikariConfig.setLeakDetectionThreshold(leakDetectionThreshold);
-        //if (maxLifetime != 0)
         hikariConfig.setMaxLifetime(maxLifetime);
         hikariConfig.setMaximumPoolSize(maxPoolSize);
         hikariConfig.setMinimumIdle(minIdle);
