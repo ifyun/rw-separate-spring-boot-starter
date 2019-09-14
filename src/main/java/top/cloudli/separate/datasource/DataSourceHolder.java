@@ -1,4 +1,4 @@
-package me.cloudli.separate.datasource;
+package top.cloudli.separate.datasource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

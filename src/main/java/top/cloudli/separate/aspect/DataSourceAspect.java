@@ -1,6 +1,6 @@
-package me.cloudli.separate.aspect;
+package top.cloudli.separate.aspect;
 
-import me.cloudli.separate.datasource.DataSourceHolder;
+import top.cloudli.separate.datasource.DataSourceHolder;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -18,17 +18,17 @@ public class DataSourceAspect {
     /**
      * 写切入点
      */
-    @Pointcut("@annotation(me.cloudli.separate.annotation.Master) ||" +
-            "@annotation(me.cloudli.separate.annotation.Write)))")
+    @Pointcut("@annotation(top.cloudli.separate.annotation.Master) ||" +
+            "@annotation(top.cloudli.separate.annotation.Write)))")
     public void writePointcut() {
     }
 
     /**
      * 读切入点
      */
-    @Pointcut("@annotation(me.cloudli.separate.annotation.Master) ||" +
-            "@annotation(me.cloudli.separate.annotation.Read) ||" +
-            "@annotation(me.cloudli.separate.annotation.Slave))")
+    @Pointcut("@annotation(top.cloudli.separate.annotation.Master) ||" +
+            "@annotation(top.cloudli.separate.annotation.Read) ||" +
+            "@annotation(top.cloudli.separate.annotation.Slave))")
     public void readPointcut() {
     }
 

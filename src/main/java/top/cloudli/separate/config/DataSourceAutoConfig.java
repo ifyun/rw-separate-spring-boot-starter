@@ -1,10 +1,10 @@
-package me.cloudli.separate.config;
+package top.cloudli.separate.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import me.cloudli.separate.datasource.DataSourceProperties;
-import me.cloudli.separate.datasource.RoutingDataSource;
-import me.cloudli.separate.datasource.SeparatedDataSourceProperties;
+import top.cloudli.separate.datasource.DataSourceProperties;
+import top.cloudli.separate.datasource.RoutingDataSource;
+import top.cloudli.separate.datasource.SeparatedDataSourceProperties;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  me.cloudli.separate.config.DataSourceAutoConfig,\
-  me.cloudli.separate.aspect.DataSourceAspect,\
-  me.cloudli.separate.datasource.DataSourceHolder
+  top.cloudli.separate.config.DataSourceAutoConfig,\
+  top.cloudli.separate.aspect.DataSourceAspect,\
+  top.cloudli.separate.datasource.DataSourceHolder
