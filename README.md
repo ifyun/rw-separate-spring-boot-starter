@@ -1,7 +1,7 @@
 # Spring Boot 主从读写分离
 
 rw-separate-spring-boot-starter 是一个可以实现任意多个主从数据源读写分离的工具，
-使用 Hikari 连接池（暂不知持其他连接池）。
+使用 Hikari 连接池（暂不支持其他连接池）。
 
 首先需要排除默认的 `DataSourceAutoConfiguration` ：
 
