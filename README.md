@@ -36,6 +36,9 @@ spring:
 - 自动装配的数据源 Bean 的名称为 routingDataSource。
 - 只支持 HikariCP 连接池。
 
+需要排除默认的 `DataSourceAutoConfiguration` 
+使用 `@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})`
+
 HikariCP 配置：
 
 ```yaml

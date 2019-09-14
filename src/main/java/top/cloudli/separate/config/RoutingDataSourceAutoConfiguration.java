@@ -2,6 +2,8 @@ package top.cloudli.separate.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import top.cloudli.separate.datasource.DataSourceProperties;
 import top.cloudli.separate.datasource.RoutingDataSource;
 import top.cloudli.separate.datasource.SeparatedDataSourceProperties;
@@ -23,7 +25,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableConfigurationProperties(SeparatedDataSourceProperties.class)
-public class DataSourceAutoConfig {
+public class RoutingDataSourceAutoConfiguration {
 
     @Value("${spring.datasource.hikari.connection-timeout:30000}")
     private long connectionTimeout;
@@ -56,7 +58,7 @@ public class DataSourceAutoConfig {
 
     private List<String> masterNames, slaveNames;
 
-    public DataSourceAutoConfig(SeparatedDataSourceProperties separatedDataSourceProperties) {
+    public RoutingDataSourceAutoConfiguration(SeparatedDataSourceProperties separatedDataSourceProperties) {
         this.separatedDataSourceProperties = separatedDataSourceProperties;
     }
 
