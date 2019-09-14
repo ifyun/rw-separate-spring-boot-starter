@@ -18,6 +18,42 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License</name>
+            <url>https://opensource.org/licenses/Apache-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <email>wfloatingcloud@outlook.com</email>
+            <name>Cloud Li</name>
+            <url>https://github.com/imcloudfloating</url>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <url>https://github.com/imcloudfloating/rw-separate-spring-boot-starter/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+    <scm>
+        <url>https://github.com/imcloudfloating/rw-separate-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/imcloudfloating/rw-separate-spring-boot-starter.git</connection>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,6 +103,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>

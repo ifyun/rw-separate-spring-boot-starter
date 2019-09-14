@@ -2,8 +2,6 @@ package top.cloudli.separate.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import top.cloudli.separate.datasource.DataSourceProperties;
 import top.cloudli.separate.datasource.RoutingDataSource;
 import top.cloudli.separate.datasource.SeparatedDataSourceProperties;
@@ -141,7 +139,7 @@ public class RoutingDataSourceAutoConfiguration {
 
         dataSources.add(dataSource);
         String name = properties.getDataSourceName();
-        // 如果没有配置数据源名称，用数据源内存地址作为名称
+        // 如果没有配置数据源名称，使用 Hikari 自己生成的名称
         dataSourceNames.add(name == null ? dataSource.toString() : name);
     }
 
@@ -150,7 +148,7 @@ public class RoutingDataSourceAutoConfiguration {
      *
      * @param masters 主库数据源
      * @param slaves  从库数据源
-     * @return {@link RoutingDataSource}
+     * @return {@link RoutingDataSource} 包含主从数据源的 DataSource
      */
     @Bean
     @DependsOn({"masterDataSources", "slaveDataSources"})
