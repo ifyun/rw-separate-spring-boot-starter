@@ -3,6 +3,16 @@
 rw-separate-spring-boot-starter 是一个可以实现任意多个主从数据源读写分离的工具，
 使用 Hikari 连接池（暂不支持其他连接池）。
 
+代码已上传到 Maven 中央仓库，可以直接使用：
+
+```xml
+<dependency>
+    <groupId>top.cloudli</groupId>
+    <artifactId>rw-separate-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 首先需要排除默认的 `DataSourceAutoConfiguration` ：
 
 ```java
