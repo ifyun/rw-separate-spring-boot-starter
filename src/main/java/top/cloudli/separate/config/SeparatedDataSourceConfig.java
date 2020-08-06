@@ -1,4 +1,4 @@
-package top.cloudli.separate.datasource;
+package top.cloudli.separate.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Configuration
 @ConfigurationProperties(prefix="spring.separated-datasource")
-public class SeparatedDataSourceProperties {
-    List<DataSourceProperties> masters;
-    List<DataSourceProperties> slaves;
+class SeparatedDataSourceConfig {
+    List<DataSourceConfig> masters;
+    List<DataSourceConfig> slaves;
 }

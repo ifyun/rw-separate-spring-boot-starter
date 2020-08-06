@@ -1,15 +1,30 @@
 # Spring Boot 主从读写分离
 
 rw-separate-spring-boot-starter 是一个可以实现任意多个主从数据源读写分离的工具，
-使用 Hikari 连接池（暂不支持其他连接池）。
+使用 Hikari 连接池（暂不支持其他连接池，后期可能会添加支持）。
 
-代码已上传到 Maven 中央仓库，可以直接使用：
+> 本工具库只是替换了 Spring Boot 数据源，你可以随意选择 ORM 框架，JPA，MyBatis 都可以使用。
+
+## 使用
+
+Step 1. 添加 jitpack 到 pom.xml：
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://www.jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+Step 2. 添加依赖：
 
 ```xml
 <dependency>
-    <groupId>top.cloudli</groupId>
+    <groupId>com.github.imcloudfloating</groupId>
     <artifactId>rw-separate-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>Tag</version>
 </dependency>
 ```
 
@@ -22,56 +37,50 @@ public class FooApplication {
     public static void main(String[] args) {
         SpringApplication.run(FooApplication.class, args);
     }
-
 }
 ```
 
-## HikariCP 配置
+> 不排除默认的 `DataSource` 会报冲突错误。
 
-hikari 的配置没有变化，与 Spring Boot 默认的配置方式一样：
+### application.yml 配置
+
+示例：
 
 ```yaml
 spring:
-  datasource:
-    hikari:
-      minimum-idle: 50
-      maximum-pool-size: 500
-      connection-test-query: "SELECT 1"
-      ...
+  separated-datasource:
+    # 主库数据源
+    masters:
+      - dataSourceName: master_1,
+        hikari:
+          driverClassName: com.mysql.cj.jdbc.Driver,
+          url: jdbc:mysql://10.0.0.100:3306/test,
+          username: root,
+          password: root
+
+    # 从库数据源
+    slaves:
+      - dataSourceName: slave_1,
+        hikari:
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.0.0.101:3306/test
+          username: reader
+          password: reader
+    
+      - dataSourceName: slave_2
+        hikari:
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.0.0.102:3306/test
+          username: reader
+          password: reader
 ```
 
-## MyBatis 数据源配置
+- 以上配置文件中的 `hikari` 部分，可以参考 `HikariConfig` 类的属性来填写
+- `dataSourceName` 为数据源的名称，请避免名称重复（如果不需要显式地指定数据源，可以不设置）
+- 当设置多个数据源时，默认使用轮询的方式来切换数据源
+- 可以只设置 `master` ，使用名称切换，当作多数据源使用，使用 `@Write("datasource")` 切换即可
 
-自动装配的数据源为 `routingDataSource`。
-
-```java
-@Configuration
-@EnableTransactionManagement
-public class MyBatisConfig {
-
-    // 注入 routingDataSource
-    @Resource(name = "routingDataSource")
-    private DataSource dataSource;
-
-    @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath:mybatis/mapper/*.xml"));
-
-        return sqlSessionFactoryBean.getObject();
-    }
-
-    @Bean
-    public PlatformTransactionManager platformTransactionManager() {
-        return new DataSourceTransactionManager(dataSource);
-    }
-}
-```
-
-## 使用注解实现读写分离
+### 使用注解实现读写分离
 
 ```java
 @Service
@@ -118,39 +127,3 @@ public class FooService {
 显式地指定数据源时，`@Write` 只能指定 masters 中的数据源，`@Read` 只能指定 slaves 中的数据源。
 
 > 可以在 DAO 层使用，但是无法支持事务。
-
-## application.yml
-
-```yaml
-spring:
-  separated-datasource:
-    # 主库数据源
-    masters:
-      - {
-        dataSourceName: master_1,
-        driverClassName: com.mysql.cj.jdbc.Driver,
-        url: jdbc:mysql://10.0.0.100:3306/test,
-        username: root,
-        password: root
-      }
-
-    # 从库数据源
-    slaves:
-      - {
-        dataSourceName: slave_1,
-        driverClassName: com.mysql.cj.jdbc.Driver,
-        url: jdbc:mysql://10.0.0.101:3306/test,
-        username: reader,
-        password: reader
-      }
-      - {
-        dataSourceName: slave_2,
-        driverClassName: com.mysql.cj.jdbc.Driver,
-        url: jdbc:mysql://10.0.0.102:3306/test,
-        username: reader,
-        password: reader
-      }
-```
-
-- `dataSourceName` 为数据源的名称，请避免名称重复（如果不需要显式地指定数据源，可以不设置）。
-- 当设置多个数据源时，默认使用轮询的方式来切换数据源。
