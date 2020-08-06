@@ -79,7 +79,7 @@ spring:
           password: reader
 ```
 
-- 以上配置文件中的 `hikari` 部分，可以参考 `HikariConfig` 类的属性来填写
+- 以上配置文件中的 `hikari` 部分，可以参考 `HikariConfig` 类中的 setter 方法来填写（首字母小写）
 - `dataSourceName` 为数据源的名称，请避免名称重复（如果不需要显式地指定数据源，可以不设置）
 - 当设置多个数据源时，默认使用轮询的方式来切换数据源
 - 可以只设置 `master` ，使用名称切换，当作多数据源使用，使用 `@Write("datasource")` 切换即可
