@@ -24,7 +24,7 @@ Step 2. 添加依赖：
 <dependency>
     <groupId>com.github.imcloudfloating</groupId>
     <artifactId>rw-separate-spring-boot-starter</artifactId>
-    <version>Tag</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
