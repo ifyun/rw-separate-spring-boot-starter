@@ -1,5 +1,9 @@
 # Spring Boot 主从读写分离
 
+![GitHub last commit](https://img.shields.io/github/last-commit/imcloudfloating/rw-separate-spring-boot-starter?style=flat-square)
+![GitHub license](https://img.shields.io/github/license/imcloudfloating/rw-separate-spring-boot-starter?style=flat-square)
+[![JitPack](https://img.shields.io/jitpack/v/github/imcloudfloating/rw-separate-spring-boot-starter?style=flat-square)](https://jitpack.io/#imcloudfloating/rw-separate-spring-boot-starter)
+
 rw-separate-spring-boot-starter 是一个可以实现任意多个主从数据源读写分离的工具，
 使用 Hikari 连接池（暂不支持其他连接池，后期可能会添加支持）。
 
