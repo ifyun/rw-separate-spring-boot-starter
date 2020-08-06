@@ -10,7 +10,7 @@
     </parent>
     <groupId>top.cloudli</groupId>
     <artifactId>rw-separate-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>RW Separate Spring Boot Starter</name>
     <description>Read/Write Separate</description>
 
