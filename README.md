@@ -55,16 +55,16 @@ spring:
   separated-datasource:
     # 主库数据源
     masters:
-      - dataSourceName: master_1,
+      - dataSourceName: master_1
         hikari:
-          driverClassName: com.mysql.cj.jdbc.Driver,
-          url: jdbc:mysql://10.0.0.100:3306/test,
-          username: root,
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.0.0.100:3306/test
+          username: root
           password: root
 
     # 从库数据源
     slaves:
-      - dataSourceName: slave_1,
+      - dataSourceName: slave_1
         hikari:
           driverClassName: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://10.0.0.101:3306/test
